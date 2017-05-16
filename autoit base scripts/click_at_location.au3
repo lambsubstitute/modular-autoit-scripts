@@ -4,8 +4,8 @@
 #AutoIt3Wrapper_Change2CUI=y
 #AutoIt3Wrapper_Res_requestedExecutionLevel=requireAdministrator
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
-;Run(@ScriptDir & "\atlassian-servicedesk-3.5.0-x32.exe")
-;Opt("WinTitleMatchMode", 2)
+
+; This click action takes in 4 parameters: window title, x cordinate of element to click, y cordinate of element to click, and screenshot name
 
 $pos = WinGetPos($CmdLine[1])
 
@@ -25,9 +25,9 @@ ConsoleWrite($pos[1] + $CmdLine[3])
 sleep($shortTimeOut)
 WinWait($CmdLine[1])
 WinActivate($CmdLine[1])
-sleep(500)
+sleep($shortTimeOut)
 MouseClick('primary', $pos[0] + $CmdLine[2], $pos[1] + $CmdLine[3], 1, 0)
-sleep(500)
+sleep($shortTimeOut)
 ;screenshot()
 
 
@@ -41,10 +41,6 @@ Func screenshot()
 
     ShellExecute(@ScriptDir & "\clickElement-" & $CmdLine[4] &  ".jpg")
 
-    ; To Capture region
-   ; _ScreenCapture_Capture(@ScriptDir & "\GDIPlus_Image2.jpg", 0, 0, 796, 596)
-
-   ; ShellExecute(@ScriptDir & "\GDIPlus_Image2.jpg")
 	 WinActivate($CmdLine[1])
 	 sleep($shortTimeOut)
      MouseClick('primary', 0, 0, 1, 0)
