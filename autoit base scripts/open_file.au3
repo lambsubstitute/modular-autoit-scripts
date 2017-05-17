@@ -6,7 +6,7 @@
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
 ;Run(@ScriptDir & "\atlassian-servicedesk-3.5.0-x32.exe")
 
-; this requires parameters for: file location full path, window title, screenshot name
+; this requires parameters for: file location full path, window title, screenshot name, screenshot flag true or false
 
 $shortTimeOut = 2000
 
@@ -28,15 +28,18 @@ screenshot()
 
 
 Func screenshot()
-	sleep($shortTimeOut)
-    ; To Capture full screen
-	ConsoleWrite(@ScriptDir & "\openProgram-" & $CmdLine[3] &  ".jpg")
-    _ScreenCapture_Capture(@ScriptDir & "\openProgram-" & $CmdLine[3] &  ".jpg")
+	$pos = WinGetPos($CmdLine[2])
+	If ($CmdLine[4] = True) Then
+		sleep($shortTimeOut)
+		; To Capture full screen
+		ConsoleWrite(@ScriptDir & "\clickElement-" & $CmdLine[3] &  ".jpg")
+		_ScreenCapture_Capture(@ScriptDir & "\clickElement-" & $CmdLine[3] &  ".jpg")
 
-    ShellExecute(@ScriptDir & "\openProgram-" & $CmdLine[3] &  ".jpg")
+		ShellExecute(@ScriptDir & "\clickElement-" & $CmdLine[3] &  ".jpg")
 
-	 WinActivate('Install - JIRA Service Desk')
-	sleep($shortTimeOut)
-     MouseClick('primary', 0, 0, 1, 0)
-	 sleep($shortTimeOut)
+		 WinActivate($CmdLine[1])
+		 sleep($shortTimeOut)
+		 MouseClick('primary', $pos[0] + 0, $pos[1] + 0, 1, 0)
+		 sleep($shortTimeOut)
+	EndIf
 EndFunc
