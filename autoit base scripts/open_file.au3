@@ -29,7 +29,7 @@ screenshot()
 
 Func screenshot()
 	$pos = WinGetPos($CmdLine[2])
-	If ($CmdLine[4] = True) Then
+	If $CmdLine[4] = 'True' Then
 		sleep($shortTimeOut)
 		; To Capture full screen
 		ConsoleWrite(@ScriptDir & "\clickElement-" & $CmdLine[3] &  ".jpg")
